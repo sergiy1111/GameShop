@@ -1,0 +1,229 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/fontawesome.css")
+    <style>
+
+        input, textarea, select {
+            max-width: none;
+        }
+
+        .form-select,
+        .form-control {
+            color: white;
+            border-radius: 0px;
+            background-color: #3d3d3d !important;
+            border-color: #000000;
+            transition-duration: 0.3s;
+        }
+
+            .form-control:hover {
+                border-color: #f3ca20;
+            }
+
+            .form-control:focus {
+                background-color: #ffffff !important;
+                border-color: #f3ca20;
+                color: black;
+                box-shadow: 0px 0px 9px 1px #f3ca20 !important;
+            }
+
+
+        body {
+            background-image: url(https://lh3.googleusercontent.com/proxy/a6kXhBeA80FnCTWh0DxG3oOu_TlTcVWjoBXOi-SUSulgefvs6tzvB4zLOL5Kb8d_TPLAuOgNqer7CZAaMFJGMtH3HAVyRi2ZuxTQnCNmCivzsndmS4D-ciBUehLP);
+        }
+
+        .btn-primary {
+            background-color: #f3ca20;
+            border-color: #f3ca20;
+            border-radius: 0px;
+            color: #000000;
+            outline: none !important;
+            transition-duration: 0.3s;
+        }
+
+            .btn-primary:hover {
+                background-color: #000000;
+                border-color: #000000;
+            }
+
+            .btn-primary:focus,
+            .btn-primary:active {
+                background-color: #f3ca20;
+                border-color: #f3ca20;
+                color: #000000;
+                box-shadow: 0px 0px 9px 1px #f3ca20 !important;
+            }
+
+        .btn-success {
+            background-color: #3d3d3d;
+            border-color: #f3ca20;
+            border-radius: 0px;
+            color: #ffffff;
+            outline: none !important;
+            transition-duration: 0.3s;
+        }
+
+            .btn-success:hover {
+                background-color: #000000;
+                border-color: #000000;
+            }
+
+            .btn-success:focus,
+            .btn-success:active {
+                background-color: #f3ca20;
+                border-color: #f3ca20;
+                color: #000000;
+                box-shadow: 0px 0px 9px 1px #f3ca20 !important;
+            }
+
+        .btn-danger {
+            background-color: #99003A;
+            border-color: #99003A;
+            border-radius: 0px;
+            color: #ffffff;
+            outline: none !important;
+            transition-duration: 0.3s;
+        }
+
+            .btn-danger:hover {
+                background-color: #000000;
+                border-color: #000000;
+            }
+
+            .btn-danger:focus,
+            .btn-danger:active {
+                background-color: #f3ca20;
+                border-color: #f3ca20;
+                color: #000000;
+                box-shadow: 0px 0px 9px 1px #f3ca20 !important;
+            }
+
+
+        .btn-outline-primary {
+            border-color: #f3ca20;
+            border-radius: 0px;
+            color: #ffffff;
+            outline: none !important;
+            transition-duration: 0.3s;
+        }
+
+            .btn-outline-primary:hover {
+                background-color: #f3ca20;
+                border-color: #000000;
+            }
+
+        .btn-outline-primary:focus,
+        .btn-outline-primary:active {
+            border-color: #f3ca20;
+            color: #ffffff;
+            box-shadow: 0px 0px 9px 1px #f3ca20 !important;
+        }
+
+        #Result {
+            transition-duration: 0.3s;
+        }
+
+        .catalog-item {
+            transition-duration: 0.3s;
+        }
+
+            .catalog-item:hover {
+                transition-duration: 0.3s;
+                background-color: #3d3d3d;
+            }
+
+        .form-check-input {
+            background-color: #f3ca20;
+            border-color: #f3ca20;
+            border-radius: 0px;
+            color: black;
+            outline: none !important;
+            transition-duration: 0.3s;
+        }
+            .form-check-input:checked,
+            .form-check-input:focus,
+            .form-check-input:active {
+                background-color: black;
+                border-color: #f3ca20;
+                color: black;
+                box-shadow: 0px 0px 9px 1px #f3ca20 !important;
+            }
+        .input-group-text {
+            background-color: #f3ca20;
+            border-color: #f3ca20;
+            border-radius: 0px;
+        }
+
+    </style>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="~/Catalog/Index">Catalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="~/Manager/Index">Manager</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        @RenderBody()
+    </div>
+
+
+    @Scripts.Render("~/Scripts/bootstrap.js")
+    @Scripts.Render("~/Scripts/jquery-3.6.0.js")
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+    @RenderSection("scripts", required: false)
+
+    <script>
+        function FileUpd(Input) {
+
+            var Files = Input.files;
+            var Img = $(Input).parent().parent().children().children();
+
+            console.log(window.URL.createObjectURL(Files[0]));
+            Img.attr("src", window.URL.createObjectURL(Files[0]));
+        }
+
+        function PopUpShow() {
+            $("#PopUp").fadeIn();
+            $("body").attr("style", "overflow-y: hidden;");
+        }
+
+
+        function Upd(route) {
+            $("#Loading").show();
+            $('#Table').hide();
+            setTimeout(function () {
+                $('#Table').show();
+                $("#Loading").hide();
+                $('#Table').load(route);
+            }, 1500);        
+        }
+
+        function PopUpHide() {
+            $("#PopUp").fadeOut();
+            $("body").attr("style", "overflow-y: scroll;");
+        }
+    </script>
+
+</body>
+</html>

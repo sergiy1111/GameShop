@@ -1,0 +1,20 @@
+﻿@model GamesShop.Models.Category
+
+@using (Ajax.BeginForm("Input", "Category", new AjaxOptions { HttpMethod = "Post", OnSuccess = "PopUpHide(); Upd('/Manager/Categories');", UpdateTargetId = "PopUpContent" }, new { @class = "col-12 container" }))
+{
+
+    @Html.HiddenFor(m => m.Id)
+    <div class="row">
+        <div class="mb-3 col-12">
+            <label for="NameInput" class="form-label col-6">Name</label>
+            <input type="text" name="CategoryName" value="@Model.CategoryName" class="form-control col-6" id="NameInput">
+        </div>
+
+        <div class="mb-3 col-6">
+            <button class="btn btn-primary col-12" onclick="PopUpHide();">Відмінити</button>
+        </div>
+        <div class="mb-3 col-6">
+            <input value="Зберегти" type="submit" class="btn btn-primary col-12" />
+        </div>
+    </div>
+}

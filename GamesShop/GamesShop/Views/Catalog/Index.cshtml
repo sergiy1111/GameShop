@@ -1,0 +1,145 @@
+﻿@model List<GamesShop.Models.Product>
+@using GamesShop.Models
+@{
+    ViewBag.Title = "Index";
+    ApplicationDbContext Context = new ApplicationDbContext();
+}
+
+
+
+<div class="row">
+    <div class="pt-4 row pb-5 bg-dark mt-5" style="position: fixed; color: white; left: 0; width: 23%; padding: 20px;">
+        <div class="input-group mb-3">
+            <button class="col-12 btn btn-primary">Search by filters</button>
+        </div>  
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <div class="row mt-3 input-group">
+            <label class="form-label col-12">Price</label>
+            <div class="input-group mb-3">
+                <span class="input-group-text" style="width: 15%;" id="PriceFrom">Від</span>
+                <input type="number" min="0" value="0" class="form-control" aria-describedby="PriceFrom">
+            </div>
+            <div class="input-group col-4">
+                <span class="input-group-text" style="width: 15%;" id="PriceTo">До</span>
+                <input type="number" max="@Model.Max(i => i.Price)" value="@Model.Max(i => i.Price)" class="form-control" aria-describedby="PriceTo">
+            </div>
+        </div>
+
+        <div class="row input-group mt-3" style="justify-content: center; display: flex;">
+            <h5 class="col-12 mt-2">OS</h5>
+            @foreach (var Item in Context.OperatingSystems)
+            {
+                <div class="form-check col-4" style="margin-left: 10px;">
+                    <input class="form-check-input" type="checkbox" value="" id="Check@(Item.Name)">
+                    <label class="form-check-label" for="Check@(Item.Name)">
+                        @Item.Name
+                    </label>
+                </div>
+            }
+        </div>
+        <div class="row input-group" style="justify-content: center; display: flex;">
+            <h5 class="col-12 mt-3">Categories</h5>
+            @foreach (var Item in Context.Categories)
+            {
+                <div class="form-check col-4" style="margin-left: 10px;">
+                    <input class="form-check-input" type="checkbox" value="" id="Check@(Item.CategoryName)">
+                    <label class="form-check-label" for="Check@(Item.CategoryName)">
+                        @Item.CategoryName
+                    </label>
+                </div>
+            }
+        </div>
+        <div class="row input-group" style="justify-content: center; display: flex;">
+            <h5 class="col-12 mt-3">Developers</h5>
+            @foreach (var Item in Context.Developers)
+            {
+                <div class="form-check col-4" style="margin-left: 10px;">
+                    <input class="form-check-input" type="checkbox" value="" id="Check@(Item.DeveloperName)">
+                    <label class="form-check-label" for="Check@(Item.DeveloperName)">
+                        @Item.DeveloperName
+                    </label>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="col-9 mt-5 bg-dark p-2 pt-5 pb-5 text-center" style="margin-left:40px; color: white; margin-left: auto; margin-right: auto;">
+        <div style="display: none; position: fixed;  color: #f3ca20; left: 0; width: 100%;" id="Loading">
+            <div style="background-color: #3d3d3d; margin-left: auto; margin-right: auto; width: 50%;">
+                <p class="col-12">
+                    Будь ласка зачекайте, йде завантаження
+                </p>
+                <img src="https://acegif.com/wp-content/uploads/loading-25.gif" width="30" />
+            </div>
+        </div>
+        <div class="p-5">
+            @foreach (var Item in Model)
+            {
+                <a style="color: white; text-decoration: none;" data-ajax-success="PopUpShow();" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#PopUpContent" href="/Catalog/Details/@Item.Id" data-ajax-loading="#Loading">
+                    <div class="catalog-item row mt-2" style="border: 1px solid #f3ca20;">
+                        <img src="~/Files/@Item.Files.FirstOrDefault().FileName" class="col-4 p-0" />
+                        <div class="col-3" style="vertical-align: central; display: flex;">
+                            <table align="center">
+                                <tr>
+                                    <td>
+                                        @Item.ProductName
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @foreach (var Category in Item.Categories)
+                                        {
+                                            <small>@(Category.CategoryName + " ")</small>
+                                        }
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-3" style="vertical-align: central; display: flex;">
+                            <table align="center">
+                                <tr>
+                                    <td>
+                                        <small>@Item.ReleaseDate.ToLongDateString()</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <small>
+                                            @foreach (var OS in Item.OperatingSystems)
+                                            {
+                                                <small>@(OS.Name + " ")</small>
+                                            }
+                                        </small>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-2" style="vertical-align: central; display: flex;">
+                            <table align="center">
+                                <tr>
+                                    <td>
+                                        <small>@Item.Price грн.</small>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+</div>
+
+<div id="PopUp" style=" background: rgba(0, 0, 0, 0.5); width: 100%; height: 100%; position: fixed  ; top: 0; left: 0; overflow-y: scroll; display: none;">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12 pt-4 pb-5 bg-dark mt-5" id="PopUpContent" style="color: white;">
+
+            </div>
+            <button class="col-1 offset-9 btn btn-primary" style="position: fixed; top: 10%;" onclick="PopUpHide();">✖</button>
+        </div>
+    </div>
+</div>
+

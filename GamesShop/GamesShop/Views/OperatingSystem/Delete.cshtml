@@ -1,0 +1,19 @@
+﻿@model GamesShop.Models.OperatingSystem
+
+@using (Ajax.BeginForm("Delete", "OperatingSystem", new AjaxOptions { HttpMethod = "Post", OnSuccess = "PopUpHide(); Upd('/Manager/OperatingSystems');", UpdateTargetId = "PopUpContent" }, new { @class = "col-12 mt-5 container" }))
+{
+
+    @Html.HiddenFor(m => m.Id)
+    <div class="row mt-5">
+        <div class="mb-3 col-12">
+           <p>Ви дійсно бажаєте видалити операційну систему "@Model.Name"</p>
+        </div>
+
+        <div class="mb-3 col-6">
+            <button class="btn btn-primary col-12" onclick="PopUpHide();">Ні</button>
+        </div>
+        <div class="mb-3 col-6">
+            <input value="Так" type="submit" class="btn btn-danger col-12" />
+        </div>
+    </div>
+}

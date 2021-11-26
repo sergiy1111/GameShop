@@ -1,0 +1,242 @@
+﻿@model GamesShop.Models.ProductInputViewModel
+@using GamesShop.Models
+@{
+    ApplicationDbContext Context = new ApplicationDbContext();
+}
+
+@using (Ajax.BeginForm("Input", "Product", new AjaxOptions { OnSuccess = "PopUpHide(); Upd('/Manager/Products');", HttpMethod = "Post", UpdateTargetId = "PopUpContent" }, new { @class = "col-12 container", enctype = "multipart/form-data" }))
+{
+    <div class="row">
+
+       @Html.HiddenFor(m => m.Id)
+
+
+        <a class="btn btn-outline-primary mt-5" data-bs-toggle="collapse" href="#GameInfoCollapse" role="button" aria-expanded="false" aria-controls="GameInfoCollapse SystemRequirementsCollapse">
+            Данні про гру (Розгорнути/Згорнути)
+        </a>
+
+        <div class="collapse" style=" border: #f3ca20 1px solid;" id="GameInfoCollapse">
+            <div class="row mt-5">
+                <div class="mb-3 col-6">
+                    <label for="NameInput" class="form-label col-6">Name</label>
+                    <input type="text" value="@Model.Name" name="Name" class="form-control col-6" id="NameInput">
+
+                </div>
+
+                <div class="mb-3 col-2">
+                    <label for="DayInput" class="form-label">День релізу</label>
+                    <select name="Day" class="form-select">
+                        <option selected value="0">- - - -</option>
+                        @for (int i = 1; i < 32; i++)
+                        {
+                            <option value="@(i)" @if (Model.Day == i) { @("selected") }>@(i)</option>
+                        }
+                    </select>
+                </div>
+                <div class="mb-3 col-2">
+                    <label for="MonthInput" class="form-label">Місяць релізу</label>
+                    <select name="Month" class="form-select">
+                        <option selected value="0">- - - -</option>
+                        @for (int i = 1; i < 13; i++)
+                        {
+                            <option value="@(i)" @if (Model.Month == i) { @("selected") }>@(i)</option>
+                        }
+                    </select>
+                </div>
+                <div class="mb-3 col-2">
+                    <label for="YearInput" class="form-label">Рік релізу</label>
+                    <select name="Year" class="form-select">
+                        <option selected value="0">- - - -</option>
+                        @for (int i = 2030; i > 1899; i--)
+                        {
+                            <option value="@(i)" @if (Model.Year == i) { @("selected") }>@(i)</option>
+                        }
+                    </select>
+                </div>
+
+
+
+                <div class="mb-3 col-12">
+                    <label for="Description" class="form-label col-12">Description</label>
+                    <textarea rows="10" name="Description" class="form-control col-12" id="DescriptionInput">@Model.Description</textarea>
+                </div>
+
+                <div class="mb-3 col-6">
+                    <label for="PriceInput" class="form-label col-12">Price</label>
+                    <input type="number" value="@Model.Price" name="Price" class="form-control col-12" id="PriceInput">
+                </div>
+
+                <div class="mb-3 col-6">
+                    <label for="RaitingInput" class="form-label col-12">Raiting</label>
+                    <input type="number" value="@Model.Raiting" name="Raiting" class="form-control col-12" id="RaitingInput">
+                </div>
+
+                <div class="mb-3 col-6">
+                    <label class="form-label col-12">Developer</label>
+                    <select class="form-select" name="Developer" aria-label="Default select example">
+                        <option selected>- - - -</option>
+                        @foreach (var Item in Context.Developers.ToList())
+                        {
+                            <option value="@Item.Id" @if (Model.Developer == Item.Id) { @("selected") }>@Item.DeveloperName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3 col-6">
+                    <label class="form-label col-12">Publisher</label>
+                    <select class="form-select" name="Publisher" aria-label="Default select example">
+                        <option selected>- - - -</option>
+                        @foreach (var Item in Context.Publishers.ToList())
+                        {
+                            <option value="@Item.Id" @if (Model.Publisher == Item.Id) { @("selected") }>@Item.PublisherName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3 col-12">
+                    <label class="form-label col-12">Category</label>
+                    <a class="btn btn-success col-12" data-ajax="true" data-ajax-mode="before" data-ajax-update="#Categories" href="/Product/Category">Add Cat</a>
+                    <table id="Categories" cellspacing="10" cellpadding="10" class="col-12 mt-5">
+                        @if (Model.Categories != null)
+                        {
+                            foreach (var Item in Model.Categories)
+                            {
+                                <tr>
+                                    <td class="mb-3 text-center">
+                                        <label>@Context.Categories.Find(Item).CategoryName<label />
+                                    </td>
+                                    <td width="20%">
+                                        <a data-ajax="true" data-ajax-update="" href="/Product/DeleteCategory?Id=@Item&ModelId=@Model.Id" class="btn btn-danger col-12" onclick="$(this).parent().parent().remove();">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                </div>
+
+                <div class="mb-3 col-12">
+                    <label class="form-label col-12">Files</label>
+                    <a class="btn btn-success col-12" data-ajax="true" data-ajax-mode="before" data-ajax-update="#File" href="/Product/File">Add File</a>
+                    <table id="File" cellspacing="10" cellpadding="10" class="col-12 mt-5">
+                        @if (Model.FilesForEdit != null)
+                        {
+                            foreach (var Item in Model.FilesForEdit)
+                            {
+               
+                        <tr>
+                            <td class=" text-center">
+                                <img src="~/Files/@Item" width="200" />
+                            </td>
+                            <td>
+                            </td>
+                            <td width="20%">
+                                <a data-ajax="true" data-ajax-update="" href="/Product/DeleteFile?File=@Item&ModelId=@Model.Id" class="btn btn-danger col-12" onclick="$(this).parent().parent().remove();">Delete</a>
+                            </td>
+                        </tr>
+                            }
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <a class="btn btn-outline-primary mt-5" data-bs-toggle="collapse" href="#SystemRequirementsCollapse" role="button" aria-expanded="false" aria-controls="SystemRequirementsCollapse GameInfoCollapse">
+            Системні вимоги (Розгорнути/Згорнути)
+        </a>
+
+        <div class="collapse" style=" border: #f3ca20 1px solid;" id="SystemRequirementsCollapse">
+            <div class="row mt-5">
+
+                <div class="mb-3 col-6">
+                    <label for="ProcesorInput" class="form-label col-12">Procesor</label>
+                    <input type="text" value="@Model.Processor" name="Processor" class="form-control col-12" id="ProcesorInput">
+                </div>
+
+                <div class="mb-3 col-6">
+                    <label for="RAMInput" class="form-label col-12">RAM</label>
+                    <input type="text" value="@Model.RAM" name="RAM" class="form-control col-12" id="RAMInput">
+                </div>
+
+                <div class="mb-3 col-6">
+                    <label for="VideoCardInput" class="form-label col-12">VideoCard</label>
+                    <input type="text" value="@Model.VideoCard" name="VideoCard" class="form-control col-12" id="VideoCardInput">
+                </div>
+
+                <div class="mb-3 col-6">
+                    <label for="DriveSpaceInput" class="form-label col-12">DriveSpace</label>
+                    <input type="text" value="@Model.DriveSpace" name="DriveSpace" class="form-control col-12" id="DriveSpaceInput">
+                </div>
+
+                <div class="mb-3 col-12">
+                    <label for="OtherInput" class="form-label col-12">Other</label>
+                    <textarea class="form-control col-12" name="Other" id="OtherInput">@Model.Other</textarea>
+                </div>
+
+                <div class="mb-3 col-12">
+                    <label class="form-label col-12">OS</label>
+                    <a class="btn btn-success col-12" data-ajax="true" data-ajax-mode="before" data-ajax-update="#OS" href="/Product/OperatingSystem">Add OS</a>
+                    <table id="OS" cellspacing="10" cellpadding="10" class="col-12 mt-5">
+                        @if (Model.OperatingSystems != null)
+                        {
+                            foreach (var Item in Model.OperatingSystems)
+                            {
+                                <tr>
+                                    <td class="mb-3 text-center">
+                                        <label>@Context.OperatingSystems.Find(Item).Name<label />
+                                    </td>
+                                    <td width="20%">
+                                        <a data-ajax="true" data-ajax-update="" href="/Product/DeleteOS?Id=@Item&ModelId=@Model.Id" class="btn btn-danger col-12" onclick="$(this).parent().parent().remove();">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <a class="btn btn-outline-primary mt-5" data-bs-toggle="collapse" href="#KeysCollapse" role="button" aria-expanded="false" aria-controls="KeysCollapse">
+            Ключі (Розгорнути/Згорнути)
+        </a>
+
+        <div class="collapse" style=" border: #f3ca20 1px solid;" id="KeysCollapse">
+            <div class="row mt-5">
+
+                <div class="mb-3 col-12">
+                    <label class="form-label col-12">Keys</label>
+                    <a class="btn btn-success col-12" data-ajax="true" data-ajax-mode="before" data-ajax-update="#Key" href="/Product/Key">Add Key</a>
+                    <table id="Key" cellspacing="10" cellpadding="10" class="col-12 mt-5">
+                        @if (Model.Keys != null)
+                        {
+                            foreach (var Item in Model.Keys)
+                            {
+                                <tr>
+                                    <td class="mb-3 text-center">
+                                        <label >@Item</label>
+                                    </td>
+                                    <td width="20%">
+                                        <a data-ajax="true" data-ajax-update="" href="/Product/DeleteKey?Id=@Item&ModelId=@Model.Id" class="btn btn-danger col-12" onclick="$(this).parent().parent().remove();">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="mb-3 col-6">
+                <button class="btn btn-primary col-12" onclick="PopUpHide();">Відмінити</button>
+            </div>
+            <div class="mb-3 col-6">
+                <input type="submit" class="btn btn-primary col-12" />
+            </div>
+        </div>
+
+    </div>
+        }

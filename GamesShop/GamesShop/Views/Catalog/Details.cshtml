@@ -1,0 +1,67 @@
+﻿@model GamesShop.Models.Product
+
+    <div class="row col-12">
+        <div id="carouselControls" class="carousel slide col-6" data-bs-ride="carousel">
+            <div class="carousel-inner" style="align-items: center; display: flex; height: 300px;">
+                <div class="carousel-item active">
+                    <img src="~/Files/@Model.Files.FirstOrDefault().FileName" class="d-block w-100" alt="Image">
+                </div>
+                @foreach (var File in Model.Files.SkipWhile(i => i.Id == Model.Files.FirstOrDefault().Id))
+                {
+                    <div class="carousel-item">
+                        <img src="~/Files/@File.FileName" class="d-block w-100" alt="Image">
+                    </div>
+                }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <div class="col-6 row">
+            <h4 class="col-12 mb-5 text-center">@Model.ProductName</h4>
+            <p class="col-6">
+                Categories: @foreach (var Category in Model.Categories)
+                {@(Category.CategoryName + " ")}
+            </p>
+            <p class="col-6 text-center" style="font-size: 20px; color: #f3ca20"><b>@Model.Price</b> грн.</p>
+            <p class="col-6">ReleaseDate: @Model.ReleaseDate.ToLongDateString()</p>
+            <button class="col-6 btn btn-primary">Add to Cart</button>
+            <p>
+                OS: @foreach (var OS in Model.OperatingSystems)
+                {@(OS.Name + " ")}
+            </p>
+            <p>Developer: @Model.Developer.DeveloperName</p>
+            <p>Publisher: @Model.Publisher.PublisherName</p>
+            <p>Metacritic raiting: @Model.Rating</p>
+        </div>
+        <div class="col-6 mt-5 row text-center">
+            <h5 class="col-12 mb-3 text-center">System requirements</h5>
+            <p class="col-12">
+                Proccesor: @Model.Processor
+            </p>
+            <p class="col-12">
+                RAM: @Model.RAM
+            </p>
+            <p class="col-12">
+                VideoCard: @Model.VideoCard
+            </p>
+            <p class="col-12">
+                DriveSpace: @Model.DriveSpace
+            </p>
+            <p class="col-12">
+                Other: @Model.Other
+            </p>
+        </div>
+        <div class="col-6 mt-5 row">
+            <h5 class="col-12 mb-3 text-center">Description</h5>
+            <p class="col-12 m-2" style=" word-break: break-word; ">
+                @Model.Description
+            </p>
+        </div>
+
+    </div>

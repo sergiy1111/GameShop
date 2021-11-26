@@ -1,0 +1,21 @@
+﻿@model GamesShop.Models.Product
+
+@using (Ajax.BeginForm("Delete", "Product", new AjaxOptions { HttpMethod = "Post", OnSuccess = "PopUpHide(); Upd('/Manager/Products');", UpdateTargetId = "PopUpContent" }, new { @class = "col-12 mt-5 container" }))
+{
+
+    @Html.HiddenFor(m => m.Id)
+    <div class="row mt-5">
+       
+        <div class="mb-3 col-12 text-center">
+            <img width="500" src="~/Files/@Model.Files.FirstOrDefault().FileName" />
+            <p class="mt-2">Ви дійсно бажаєте видалити гру "@Model.ProductName"</p>
+        </div>
+
+        <div class="mb-3 col-6">
+            <button class="btn btn-primary col-12" onclick="PopUpHide();">Ні</button>
+        </div>
+        <div class="mb-3 col-6">
+            <input value="Так" type="submit" class="btn btn-danger col-12" />
+        </div>
+    </div>
+}
