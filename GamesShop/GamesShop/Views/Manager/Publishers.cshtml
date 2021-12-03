@@ -1,21 +1,21 @@
 ﻿@model List<GamesShop.Models.Publisher>
 
 <div class="col-12">
-    <a class="btn btn-primary col-12 mt-5" data-ajax-loading="#Loading" data-ajax="true" data-ajax-mode="replace" data-ajax-success="PopUpShow();" data-ajax-update="#PopUpContent" href="/Publisher/Input/-1">Add</a>
+    <a class="btn btn-primary col-12 mt-5" data-ajax-loading="#Loading" data-ajax="true" data-ajax-mode="replace" data-ajax-success="PopUpShow();" data-ajax-update="#PopUpContent" href="/Publisher/Input/-1">Додати</a>
 </div>
 
 <table class="table table-dark text-center">
     <tr>
-        <th>Name</th>
-        <th>Operations</th>
+        <th>Назва</th>
+        <th>Дії</th>
     </tr>
     @foreach (var Item in Model)
     {
         <tr>
             <td>@Item.PublisherName</td>
             <td width="20%">
-                <a data-ajax="true" data-ajax-loading="#Loading" data-ajax-mode="replace" data-ajax-success="PopUpShow();" data-ajax-update="#PopUpContent" href="/Publisher/Input/@Item.Id" class="btn btn-primary col-12 mt-1">Edit</a>
-                <a data-ajax="true" data-ajax-loading="#Loading" data-ajax-mode="replace" data-ajax-success="PopUpShow();" data-ajax-update="#PopUpContent" href="/Publisher/Delete/@Item.Id" class="btn btn-primary col-12 mt-1">Delete</a>
+                <a data-ajax="true" data-ajax-loading="#Loading" data-ajax-mode="replace" data-ajax-success="PopUpShow();" data-ajax-update="#PopUpContent" href="/Publisher/Input/@Item.Id" class="btn btn-primary col-12 mt-1">Редагувати</a>
+                <a data-ajax="true" data-ajax-loading="#Loading" data-ajax-mode="replace" data-ajax-success="PopUpShow();" data-ajax-update="#PopUpContent" href="/Publisher/Delete/@Item.Id" class="btn btn-primary col-12 mt-1">Видалити</a>
             </td>
         </tr>
     }
