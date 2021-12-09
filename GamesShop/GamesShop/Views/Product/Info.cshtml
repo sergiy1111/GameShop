@@ -1,0 +1,101 @@
+﻿@model GamesShop.Models.Product
+@using Microsoft.AspNet.Identity;
+@using GamesShop.Models;
+
+<div class="row col-12">
+    <div id="carouselControls" class="carousel slide col-6" data-bs-ride="carousel">
+        <div class="carousel-inner" style="align-items: center; display: flex; height: 300px;">
+            <div class="carousel-item active">
+                <img src="~/Files/@Model.Files.FirstOrDefault().FileName" class="d-block w-100" alt="Image">
+            </div>
+            @foreach (var File in Model.Files.SkipWhile(i => i.Id == Model.Files.FirstOrDefault().Id))
+            {
+<div class="carousel-item">
+    <img src="~/Files/@File.FileName" class="d-block w-100" alt="Image">
+</div>      }
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <div class="col-6 row">
+        <h4 class="col-12 mb-5 text-center">@Model.ProductName</h4>
+        <div class="col-6">
+            <p>
+                Жанр: @foreach (var Category in Model.Categories)
+                {@(Category.CategoryName + ", ")}
+            </p>
+            <p>
+                Ціна: @Model.Price
+            </p>
+            <p>
+                Дата виходу: @Model.ReleaseDate.ToLongDateString()
+            </p>
+            <p>
+                Операційні системи: @foreach (var OS in Model.OperatingSystems)
+                {@(OS.Name + ", ")}
+            </p>
+
+        </div>
+        <div class="col-6">
+            <p class="text-center">
+                Ключів в наявності: @Model.Keys.Where(i => i.IsUsed == false).Count()
+            </p>
+            <p class="text-center">Розробник: @Model.Developer.DeveloperName</p>
+            <p class="text-center">Видавець: @Model.Publisher.PublisherName</p>
+            <p class="text-center">Рейтинг метакритику: @Model.Rating</p>
+        </div>
+    </div>
+    <div class="col-6 mt-5 row text-center">
+        <h5 class="col-12 mb-3 text-center">Системні зарактеристики</h5>
+        <p class="col-12">
+            Процесор: @Model.Processor
+        </p>
+        <p class="col-12">
+            RAM: @Model.RAM
+        </p>
+        <p class="col-12">
+            Відеокарта: @Model.VideoCard
+        </p>
+        <p class="col-12">
+            Місце на диску: @Model.DriveSpace
+        </p>
+        <p class="col-12">
+            Інше: @Model.Other
+        </p>
+    </div>
+    <div class="col-6 mt-5 row">
+        <h5 class="col-12 mb-3 text-center">Опис</h5>
+        <p class="col-12 m-2" style=" word-break: break-word; ">
+            @Model.Description
+        </p>
+    </div>
+    <div class="col-12 row mt-5">
+        <h5 class="col-12 text-center">Ключі</h5>
+        <table class="table col-12 text-center" style="color: white;">
+            <tr>
+                <th>Ключ</th>
+                <th>Використаний</th>
+            </tr>
+            @foreach (var Key in Model.Keys)
+            {
+<tr>
+    <th>@Key.KeyString</th>
+    <th>
+        @if (Key.IsUsed)
+        {@("Так") }
+        else
+        { @("Ні")}
+    </th>
+</tr>
+       }
+        </table>
+
+    </div>
+
+</div>
