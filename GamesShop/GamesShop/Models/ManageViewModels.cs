@@ -30,11 +30,11 @@ namespace GamesShop.Models
         [Required]
         [StringLength(100, ErrorMessage = "Значение {0} должно содержать символов не менее: {2}.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Новый пароль")]
+        [Display(Name = "Новий пароль")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Подтверждение нового пароля")]
+        [Display(Name = "Підтвердження нового паролю")]
         [Compare("NewPassword", ErrorMessage = "Новый пароль и его подтверждение не совпадают.")]
         public string ConfirmPassword { get; set; }
     }
@@ -43,17 +43,17 @@ namespace GamesShop.Models
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Текущий пароль")]
+        [Display(Name = "Активний пароль")]
         public string OldPassword { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "Значение {0} должно содержать символов не менее: {2}.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Новый пароль")]
+        [Display(Name = "Новий пароль")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Подтверждение нового пароля")]
+        [Display(Name = "Підтвердження нового паролю")]
         [Compare("NewPassword", ErrorMessage = "Новый пароль и его подтверждение не совпадают.")]
         public string ConfirmPassword { get; set; }
     }

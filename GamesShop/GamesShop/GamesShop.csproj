@@ -171,6 +171,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CatalogController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\OperatingSystemController.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\PublisherController.cs" />
     <Compile Include="Global.asax.cs">
@@ -207,8 +209,21 @@
     <Compile Include="Migrations\202111241301116_5.designer.cs">
       <DependentUpon>202111241301116_5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202112080904023_6.cs" />
+    <Compile Include="Migrations\202112080904023_6.designer.cs">
+      <DependentUpon>202112080904023_6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112080907088_7.cs" />
+    <Compile Include="Migrations\202112080907088_7.designer.cs">
+      <DependentUpon>202112080907088_7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112091026034_8.cs" />
+    <Compile Include="Migrations\202112091026034_8.designer.cs">
+      <DependentUpon>202112091026034_8.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AdminInitializer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IRepositories.cs" />
     <Compile Include="Models\ManagerViewModels.cs" />
@@ -365,6 +380,13 @@
     <Content Include="Views\Product\Delete.cshtml" />
     <Content Include="Views\Catalog\Index.cshtml" />
     <Content Include="Views\Catalog\Details.cshtml" />
+    <Content Include="Views\Catalog\Search.cshtml" />
+    <Content Include="Views\Cart\List.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Cart\Delete.cshtml" />
+    <Content Include="Views\Order\Create.cshtml" />
+    <Content Include="Views\Cart\DeleteFromList.cshtml" />
+    <Content Include="Views\Order\History.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -392,6 +414,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202111241301116_5.resx">
       <DependentUpon>202111241301116_5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112080904023_6.resx">
+      <DependentUpon>202112080904023_6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112080907088_7.resx">
+      <DependentUpon>202112080907088_7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112091026034_8.resx">
+      <DependentUpon>202112091026034_8.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

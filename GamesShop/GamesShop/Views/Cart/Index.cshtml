@@ -1,0 +1,119 @@
+﻿@model List<GamesShop.Models.Product>
+
+@{ 
+    double Price = 0;
+    foreach(var i in Model)
+    {
+        Price += i.Price;
+    }
+}
+
+    <div class="row">
+        <div class="pt-4 row pb-5 bg-dark mt-5" style="position: fixed; color: white; left: 0; width: 20%; padding: 20px;">
+            <div class="input-group mb-3 text-center pb-2 pt-2" style="border: 5px dotted #f3ca20">
+                <h4 class="col-12">Загальна сумма покупки</h4>
+                <h3 class="col-12" style="color: #f3ca20;">@Price грн</h3>
+            </div>
+            <div class="input-group mb-3">
+                <a href="~/Order/Create" class="col-12 btn btn-primary">Перейти до оформлення покупки</a>
+            </div>
+        </div>
+
+
+        <div class="col-10 mt-5 bg-dark p-2 pt-5 pb-5 text-center" style="margin-left:40px; color: white; margin-left: auto; margin-right: auto;">
+            <div style="display: none; position: fixed;  color: #f3ca20; left: 0; width: 100%;" id="Loading">
+                <div style="background-color: #3d3d3d; margin-left: auto; margin-right: auto; width: 50%;">
+                    <p class="col-12 pt-3">
+                        Будь ласка зачекайте, йде завантаження
+                    </p>
+                    <ion-icon class="Loading mb-3 mt-3" name="game-controller"></ion-icon>
+                </div>
+            </div>
+
+            <div class="p-5" id="Cart">
+                @if (Model.Count <= 0)
+                {
+                    <h4 class="text-center">Ваш кошик пустий</h4>
+                }
+
+                @foreach (var Item in Model)
+                {
+                    <div class="col-12 row">
+                        <a style="color: white; text-decoration: none;" class="col-10" data-ajax-success="PopUpShow();" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#PopUpContent" href="/Catalog/Details/@Item.Id" data-ajax-loading="#Loading">
+                            <div class="catalog-item row mt-2" style="border: 1px solid #f3ca20;">
+                                <img src="~/Files/@Item.Files.FirstOrDefault().FileName" class="col-4 p-0" />
+                                <div class="col-3" style="vertical-align: central; display: flex;">
+                                    <table align="center">
+                                        <tr>
+                                            <td>
+                                                @Item.ProductName
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @foreach (var Category in Item.Categories)
+                                                {
+                                                    <small>@(Category.CategoryName + " ")</small>
+                                                }
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-3" style="vertical-align: central; display: flex;">
+                                    <table align="center">
+                                        <tr>
+                                            <td>
+                                                <small>@Item.ReleaseDate.ToLongDateString()</small>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <small>
+                                                    @foreach (var OS in Item.OperatingSystems)
+                                                    {
+                                                        <small>@(OS.Name + " ")</small>
+                                                    }
+                                                </small>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-2" style="vertical-align: central; display: flex;">
+                                    <table align="center">
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <p style="color: #f3ca20">@Item.Price грн.</p>
+                                                </div>
+                                                <div>
+                                                    <small>Ключів в наявності: @Item.Keys.Where(i => i.IsUsed == false).Count()</small>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="col-2 mt-2" style="border: 1px solid #f3ca20; vertical-align: central; display: flex;">
+                            <a href="~/Cart/Delete/@Item.Id" data-ajax="true" data-ajax-update="#Cart" class="col-12 btn btn-primary">Видалити з корзини</a>
+                        </div>
+
+                    </div>
+                }
+            </div>
+
+        </div>
+
+
+        <div id="PopUp" style=" background: rgba(0, 0, 0, 0.5); width: 100%; height: 100%; position: fixed  ; top: 0; left: 0; overflow-y: scroll; display: none;">
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-12 pt-4 pb-5 bg-dark mt-5" id="PopUpContent" style="color: white;">
+
+                    </div>
+                    <button class="col-1 offset-9 btn btn-primary" style="position: fixed; top: 10%;" onclick="PopUpHide();">✖</button>
+                </div>
+            </div>
+        </div>
+    </div>

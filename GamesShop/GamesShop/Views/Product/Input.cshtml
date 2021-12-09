@@ -18,7 +18,7 @@
         <div class="collapse" style=" border: #f3ca20 1px solid;" id="GameInfoCollapse">
             <div class="row mt-5">
                 <div class="mb-3 col-6">
-                    <label for="NameInput" class="form-label col-6">Name</label>
+                    <label for="NameInput" class="form-label col-6">Назва</label>
                     <input type="text" value="@Model.Name" name="Name" class="form-control col-6" id="NameInput">
 
                 </div>
@@ -57,22 +57,22 @@
 
 
                 <div class="mb-3 col-12">
-                    <label for="Description" class="form-label col-12">Description</label>
+                    <label for="Description" class="form-label col-12">Опис</label>
                     <textarea rows="10" name="Description" class="form-control col-12" id="DescriptionInput">@Model.Description</textarea>
                 </div>
 
                 <div class="mb-3 col-6">
-                    <label for="PriceInput" class="form-label col-12">Price</label>
+                    <label for="PriceInput" class="form-label col-12">Ціна</label>
                     <input type="number" value="@Model.Price" name="Price" class="form-control col-12" id="PriceInput">
                 </div>
 
                 <div class="mb-3 col-6">
-                    <label for="RaitingInput" class="form-label col-12">Raiting</label>
+                    <label for="RaitingInput" class="form-label col-12">Рейтинг</label>
                     <input type="number" value="@Model.Raiting" name="Raiting" class="form-control col-12" id="RaitingInput">
                 </div>
 
                 <div class="mb-3 col-6">
-                    <label class="form-label col-12">Developer</label>
+                    <label class="form-label col-12">Розробникr</label>
                     <select class="form-select" name="Developer" aria-label="Default select example">
                         <option selected>- - - -</option>
                         @foreach (var Item in Context.Developers.ToList())
@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="mb-3 col-6">
-                    <label class="form-label col-12">Publisher</label>
+                    <label class="form-label col-12">Видавництво</label>
                     <select class="form-select" name="Publisher" aria-label="Default select example">
                         <option selected>- - - -</option>
                         @foreach (var Item in Context.Publishers.ToList())
@@ -94,8 +94,8 @@
                 </div>
 
                 <div class="mb-3 col-12">
-                    <label class="form-label col-12">Category</label>
-                    <a class="btn btn-success col-12" data-ajax="true" data-ajax-mode="before" data-ajax-update="#Categories" href="/Product/Category">Add Cat</a>
+                    <label class="form-label col-12">Жанр</label>
+                    <a class="btn btn-success col-12" data-ajax="true" data-ajax-mode="before" data-ajax-update="#Categories" href="/Product/Category">Додати жанр</a>
                     <table id="Categories" cellspacing="10" cellpadding="10" class="col-12 mt-5">
                         @if (Model.Categories != null)
                         {
@@ -115,8 +115,8 @@
                 </div>
 
                 <div class="mb-3 col-12">
-                    <label class="form-label col-12">Files</label>
-                    <a class="btn btn-success col-12" data-ajax="true" data-ajax-mode="before" data-ajax-update="#File" href="/Product/File">Add File</a>
+                    <label class="form-label col-12">Файли</label>
+                    <a class="btn btn-success col-12" data-ajax="true" data-ajax-mode="before" data-ajax-update="#File" href="/Product/File">Додати файл</a>
                     <table id="File" cellspacing="10" cellpadding="10" class="col-12 mt-5">
                         @if (Model.FilesForEdit != null)
                         {
@@ -149,7 +149,7 @@
             <div class="row mt-5">
 
                 <div class="mb-3 col-6">
-                    <label for="ProcesorInput" class="form-label col-12">Procesor</label>
+                    <label for="ProcesorInput" class="form-label col-12">Процесор</label>
                     <input type="text" value="@Model.Processor" name="Processor" class="form-control col-12" id="ProcesorInput">
                 </div>
 
@@ -159,23 +159,23 @@
                 </div>
 
                 <div class="mb-3 col-6">
-                    <label for="VideoCardInput" class="form-label col-12">VideoCard</label>
+                    <label for="VideoCardInput" class="form-label col-12">Відеокарта</label>
                     <input type="text" value="@Model.VideoCard" name="VideoCard" class="form-control col-12" id="VideoCardInput">
                 </div>
 
                 <div class="mb-3 col-6">
-                    <label for="DriveSpaceInput" class="form-label col-12">DriveSpace</label>
+                    <label for="DriveSpaceInput" class="form-label col-12">Місце на диску</label>
                     <input type="text" value="@Model.DriveSpace" name="DriveSpace" class="form-control col-12" id="DriveSpaceInput">
                 </div>
 
                 <div class="mb-3 col-12">
-                    <label for="OtherInput" class="form-label col-12">Other</label>
+                    <label for="OtherInput" class="form-label col-12">Інше</label>
                     <textarea class="form-control col-12" name="Other" id="OtherInput">@Model.Other</textarea>
                 </div>
 
                 <div class="mb-3 col-12">
-                    <label class="form-label col-12">OS</label>
-                    <a class="btn btn-success col-12" data-ajax="true" data-ajax-mode="before" data-ajax-update="#OS" href="/Product/OperatingSystem">Add OS</a>
+                    <label class="form-label col-12">Операційна система</label>
+                    <a class="btn btn-success col-12" data-ajax="true" data-ajax-mode="before" data-ajax-update="#OS" href="/Product/OperatingSystem">Додати OS</a>
                     <table id="OS" cellspacing="10" cellpadding="10" class="col-12 mt-5">
                         @if (Model.OperatingSystems != null)
                         {
@@ -186,7 +186,7 @@
                                         <label>@Context.OperatingSystems.Find(Item).Name<label />
                                     </td>
                                     <td width="20%">
-                                        <a data-ajax="true" data-ajax-update="" href="/Product/DeleteOS?Id=@Item&ModelId=@Model.Id" class="btn btn-danger col-12" onclick="$(this).parent().parent().remove();">Delete</a>
+                                        <a data-ajax="true" data-ajax-update="" href="/Product/DeleteOS?Id=@Item&ModelId=@Model.Id" class="btn btn-danger col-12" onclick="$(this).parent().parent().remove();">Видалити</a>
                                     </td>
                                 </tr>
                             }
@@ -206,8 +206,8 @@
             <div class="row mt-5">
 
                 <div class="mb-3 col-12">
-                    <label class="form-label col-12">Keys</label>
-                    <a class="btn btn-success col-12" data-ajax="true" data-ajax-mode="before" data-ajax-update="#Key" href="/Product/Key">Add Key</a>
+                    <label class="form-label col-12">Ключі</label>
+                    <a class="btn btn-success col-12" data-ajax="true" data-ajax-mode="before" data-ajax-update="#Key" href="/Product/Key">Додати ключ</a>
                     <table id="Key" cellspacing="10" cellpadding="10" class="col-12 mt-5">
                         @if (Model.Keys != null)
                         {
@@ -218,7 +218,7 @@
                                         <label >@Item</label>
                                     </td>
                                     <td width="20%">
-                                        <a data-ajax="true" data-ajax-update="" href="/Product/DeleteKey?Id=@Item&ModelId=@Model.Id" class="btn btn-danger col-12" onclick="$(this).parent().parent().remove();">Delete</a>
+                                        <a data-ajax="true" data-ajax-update="" href="/Product/DeleteKey?Id=@Item&ModelId=@Model.Id" class="btn btn-danger col-12" onclick="$(this).parent().parent().remove();">Видалити</a>
                                     </td>
                                 </tr>
                             }
@@ -229,14 +229,14 @@
             </div>
         </div>
 
-        <div class="row mt-5">
-            <div class="mb-3 col-6">
-                <button class="btn btn-primary col-12" onclick="PopUpHide();">Відмінити</button>
+            <div class="mb-3 mt-5 col-12">
+                <input type="submit" value="Зберегти" class="btn btn-primary col-12" />
             </div>
-            <div class="mb-3 col-6">
-                <input type="submit" class="btn btn-primary col-12" />
-            </div>
-        </div>
-
     </div>
         }
+
+<div class="container">
+    <div class="mb-3 col-12">
+        <button class="btn btn-primary col-12" onclick="PopUpHide();">Відмінити</button>
+    </div>
+</div>

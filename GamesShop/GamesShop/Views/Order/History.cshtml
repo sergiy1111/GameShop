@@ -1,0 +1,47 @@
+﻿@model List<GamesShop.Models.Order>
+
+    <div class="row">
+        <div class="col-10 mt-5 bg-dark p-2 pt-5 pb-5 text-center" style="margin-left:40px; color: white; margin-left: auto; margin-right: auto;">
+            <div style="display: none; position: fixed;  color: #f3ca20; left: 0; width: 100%;" id="Loading">
+                <div style="background-color: #3d3d3d; margin-left: auto; margin-right: auto; width: 50%;">
+                    <p class="col-12 pt-3">
+                        Будь ласка зачекайте, йде завантаження
+                    </p>
+                    <ion-icon class="Loading mb-3 mt-3" name="game-controller"></ion-icon>
+                </div>
+            </div>
+
+            <div class="p-5" id="Cart">
+                @if (Model.Count <= 0)
+                {
+                    <h4 class="text-center">Ваша історія покупок пуста</h4>
+                }
+
+                @foreach (var Item in Model)
+                {
+                    <div class="col-12 mt-2 mb-2 row">                       
+                        <div class="row" style="border: 1px solid #f3ca20;">
+                            <div class="col-6 mb-2">
+                                <h4 class="col-12 mt-2 text-center">Покупка № @Item.Id</h4>
+                                <h5>На сумму <small style="color: #f3ca20;">@Item.Summary грн.</small></h5>
+                            </div>
+                            <div class="col-6 row mt-2 mb-2 d-flex align-items-lg-center">
+                                @foreach (var Key in Item.Keys)
+                                {
+
+                                    <div class="col-6 text-center">
+                                        <p class="m-0 p-0">@Key.Product.ProductName</p>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <p class="m-0 p-0">@Key.KeyString</p>
+                                    </div>
+                                }
+                            </div>
+                            </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+
+    </div>

@@ -1,0 +1,60 @@
+﻿@model List<GamesShop.Models.Product>
+
+@foreach (var Item in Model)
+{
+    <a style="color: white; text-decoration: none;" data-ajax-success="PopUpShow();" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#PopUpContent" href="/Catalog/Details/@Item.Id" data-ajax-loading="#Loading">
+        <div class="catalog-item row mt-2" style="border: 1px solid #f3ca20;">
+            <img src="~/Files/@Item.Files.FirstOrDefault().FileName" class="col-4 p-0" />
+            <div class="col-3" style="vertical-align: central; display: flex;">
+                <table align="center">
+                    <tr>
+                        <td>
+                            @Item.ProductName
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @foreach (var Category in Item.Categories)
+                            {
+                                <small>@(Category.CategoryName + " ")</small>
+                            }
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-3" style="vertical-align: central; display: flex;">
+                <table align="center">
+                    <tr>
+                        <td>
+                            <small>@Item.ReleaseDate.ToLongDateString()</small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <small>
+                                @foreach (var OS in Item.OperatingSystems)
+                                {
+                                    <small>@(OS.Name + " ")</small>
+                                }
+                            </small>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-2" style="vertical-align: central; display: flex;">
+                <table align="center">
+                    <tr>
+                        <td>
+                            <div>
+                                <p style="color: #f3ca20">@Item.Price грн.</p>
+                            </div>
+                            <div>
+                                <small>Ключів в наявності: @Item.Keys.Count</small>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </a>
+}

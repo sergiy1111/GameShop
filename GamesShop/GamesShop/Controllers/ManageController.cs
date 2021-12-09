@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using GamesShop.Models;
 
+
 namespace GamesShop.Controllers
 {
     [Authorize]

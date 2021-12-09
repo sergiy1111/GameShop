@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace GamesShop.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class ProductController : Controller
     {
         // GET: Product

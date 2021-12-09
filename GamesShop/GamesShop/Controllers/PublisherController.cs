@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace GamesShop.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class PublisherController : Controller
     {
         // GET: Publisher

@@ -1,22 +1,16 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-    @Html.AntiForgeryToken()
-
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Здравствуйте " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a></li>
-    </ul>
-    }
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "form-inline my-2 my-lg-0", style="display: none" })) { @Html.AntiForgeryToken() }
+    <div class="margin-auto">
+        <a class="btn btn-outline-primary" aria-current="page" href="~/Manage/Index">Профіль</a>
+        <a class="btn btn-outline-primary" href="javascript:document.getElementById('logoutForm').submit()">Вийти</a>
+    </div>
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Регистрация", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Выполнить вход", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+    <div class="margin-auto">
+        <a class="btn btn-outline-primary" aria-current="page" href="~/Account/Register">Реєстрація</a>
+        <a class="btn btn-outline-primary" aria-current="page" href="~/Account/Login">Авторизація</a>
+    </div>
 }

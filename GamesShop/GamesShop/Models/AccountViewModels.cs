@@ -6,7 +6,7 @@ namespace GamesShop.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "Адрес электронной почты")]
+        [Display(Name = "Адреса електронної пошти")]
         public string Email { get; set; }
     }
 
@@ -33,7 +33,7 @@ namespace GamesShop.Models
         public string Code { get; set; }
         public string ReturnUrl { get; set; }
 
-        [Display(Name = "Запомнить браузер?")]
+        [Display(Name = "Запамятати браузер?")]
         public bool RememberBrowser { get; set; }
 
         public bool RememberMe { get; set; }
@@ -48,36 +48,39 @@ namespace GamesShop.Models
 
     public class LoginViewModel
     {
-        [Required]
-        [Display(Name = "Адрес электронной почты")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Required(ErrorMessage = "Логін має бути введено")]
+        [Display(Name = "Логін")]
+        public string Login { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Пароль має бути введено")]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
 
-        [Display(Name = "Запомнить меня")]
+        [Display(Name = "Запам'ятати мене")]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Логін має бути введено")]
+        [Display(Name = "Логін")]
+        public string Login { get; set; }
+
         [EmailAddress]
-        [Display(Name = "Адрес электронной почты")]
+        [Required(ErrorMessage = "Пошта має бути введена")]
+        [Display(Name = "Пошта")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Пароль має бути введено")]
+        [StringLength(100, ErrorMessage = "Пароль має мати більше {2} символів.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Подтверждение пароля")]
-        [Compare("Password", ErrorMessage = "Пароль и его подтверждение не совпадают.")]
+        [Display(Name = "Підтвердження паролю")]
+        [Compare("Password", ErrorMessage = "Паролі не співпадають.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -95,7 +98,7 @@ namespace GamesShop.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Подтверждение пароля")]
+        [Display(Name = "Підтвердеження пароля")]
         [Compare("Password", ErrorMessage = "Пароль и его подтверждение не совпадают.")]
         public string ConfirmPassword { get; set; }
 

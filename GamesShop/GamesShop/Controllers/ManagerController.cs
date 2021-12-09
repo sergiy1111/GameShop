@@ -5,8 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using GamesShop.Models;
 
+
 namespace GamesShop.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class ManagerController : Controller
     {
         // GET: Manager

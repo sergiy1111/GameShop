@@ -1,38 +1,59 @@
 ﻿@model List<GamesShop.Models.Product>
 @using GamesShop.Models
+@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Index";
     ApplicationDbContext Context = new ApplicationDbContext();
 }
 
+@if (User.Identity.IsAuthenticated)
+{
+    <a class="cart" data-bs-toggle="offcanvas" data-ajax="true" data-ajax-mode="replace" href="/Cart/List" data-ajax-update="#Cart" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+        <ion-icon class="p-0 mt-3" name="cart"></ion-icon>
+    </a>
+}
 
+<div class="offcanvas offcanvas-end bg-dark" style="width: 30%;" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h5 id="offcanvasRightLabel">Кошик</h5>
+        <button type="button" class="btn-close-" data-bs-dismiss="offcanvas" aria-label="Close"><ion-icon name="close"></ion-icon></button>
+    </div>
+    <div class="offcanvas-body" id="Cart">
+
+    </div>
+
+    <div class="col-12">
+        <a href="~/Cart/Index" type="button" class="btn btn-primary col-12">Перейти до кошика</a>
+    </div>
+</div>
 
 <div class="row">
-    <div class="pt-4 row pb-5 bg-dark mt-5" style="position: fixed; color: white; left: 0; width: 23%; padding: 20px;">
+    @using (Ajax.BeginForm("Search", "Catalog", new AjaxOptions { UpdateTargetId = "SearchResult" }, new { @class = "pt-4 row pb-5 bg-dark mt-5", style = "position: fixed; color: white; left: 0; width: 23%; padding: 20px;" }))
+    {
         <div class="input-group mb-3">
-            <button class="col-12 btn btn-primary">Search by filters</button>
-        </div>  
+            <input type="submit" class="col-12 btn btn-primary" value="Пошук за фільтрами">
+        </div>
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Search">
+            <input type="text" name="Search" class="form-control" placeholder="Пошук">
         </div>
         <div class="row mt-3 input-group">
-            <label class="form-label col-12">Price</label>
+            <label class="form-label col-12">Ціна</label>
             <div class="input-group mb-3">
                 <span class="input-group-text" style="width: 15%;" id="PriceFrom">Від</span>
-                <input type="number" min="0" value="0" class="form-control" aria-describedby="PriceFrom">
+                <input type="number" name="MinPrice" min="0" value="0" class="form-control" aria-describedby="PriceFrom">
             </div>
             <div class="input-group col-4">
                 <span class="input-group-text" style="width: 15%;" id="PriceTo">До</span>
-                <input type="number" max="@Model.Max(i => i.Price)" value="@Model.Max(i => i.Price)" class="form-control" aria-describedby="PriceTo">
+                <input type="number" name="MaxPrice" max="@Model.Max(i => i.Price)" value="@Model.Max(i => i.Price)" class="form-control" aria-describedby="PriceTo">
             </div>
         </div>
 
         <div class="row input-group mt-3" style="justify-content: center; display: flex;">
-            <h5 class="col-12 mt-2">OS</h5>
+            <h5 class="col-12 mt-2">Операційні системи</h5>
             @foreach (var Item in Context.OperatingSystems)
             {
                 <div class="form-check col-4" style="margin-left: 10px;">
-                    <input class="form-check-input" type="checkbox" value="" id="Check@(Item.Name)">
+                    <input class="form-check-input" type="checkbox" value="@Item.Id" name="OS" id="Check@(Item.Name)">
                     <label class="form-check-label" for="Check@(Item.Name)">
                         @Item.Name
                     </label>
@@ -40,11 +61,11 @@
             }
         </div>
         <div class="row input-group" style="justify-content: center; display: flex;">
-            <h5 class="col-12 mt-3">Categories</h5>
+            <h5 class="col-12 mt-3">Жанри</h5>
             @foreach (var Item in Context.Categories)
             {
                 <div class="form-check col-4" style="margin-left: 10px;">
-                    <input class="form-check-input" type="checkbox" value="" id="Check@(Item.CategoryName)">
+                    <input class="form-check-input" type="checkbox" value="@Item.Id" name="Categories" id="Check@(Item.CategoryName)">
                     <label class="form-check-label" for="Check@(Item.CategoryName)">
                         @Item.CategoryName
                     </label>
@@ -52,29 +73,30 @@
             }
         </div>
         <div class="row input-group" style="justify-content: center; display: flex;">
-            <h5 class="col-12 mt-3">Developers</h5>
+            <h5 class="col-12 mt-3">Розробник</h5>
             @foreach (var Item in Context.Developers)
             {
                 <div class="form-check col-4" style="margin-left: 10px;">
-                    <input class="form-check-input" type="checkbox" value="" id="Check@(Item.DeveloperName)">
+                    <input class="form-check-input" type="checkbox" value="@Item.Id" name="Developers" id="Check@(Item.DeveloperName)">
                     <label class="form-check-label" for="Check@(Item.DeveloperName)">
                         @Item.DeveloperName
                     </label>
                 </div>
             }
         </div>
-    </div>
+    }
+
 
     <div class="col-9 mt-5 bg-dark p-2 pt-5 pb-5 text-center" style="margin-left:40px; color: white; margin-left: auto; margin-right: auto;">
         <div style="display: none; position: fixed;  color: #f3ca20; left: 0; width: 100%;" id="Loading">
             <div style="background-color: #3d3d3d; margin-left: auto; margin-right: auto; width: 50%;">
-                <p class="col-12">
+                <p class="col-12 pt-3">
                     Будь ласка зачекайте, йде завантаження
                 </p>
-                <img src="https://acegif.com/wp-content/uploads/loading-25.gif" width="30" />
+                <ion-icon class="Loading mb-3 mt-3" name="game-controller"></ion-icon>
             </div>
         </div>
-        <div class="p-5">
+        <div class="p-5" id="SearchResult">
             @foreach (var Item in Model)
             {
                 <a style="color: white; text-decoration: none;" data-ajax-success="PopUpShow();" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#PopUpContent" href="/Catalog/Details/@Item.Id" data-ajax-loading="#Loading">
@@ -120,7 +142,12 @@
                             <table align="center">
                                 <tr>
                                     <td>
-                                        <small>@Item.Price грн.</small>
+                                        <div>
+                                            <p style="color: #f3ca20">@Item.Price грн.</p>
+                                        </div>
+                                        <div>
+                                            <small>Ключів в наявності: @Item.Keys.Where(i => i.IsUsed == false).Count()</small>
+                                        </div>
                                     </td>
                                 </tr>
                             </table>

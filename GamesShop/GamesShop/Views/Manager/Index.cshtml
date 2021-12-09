@@ -4,21 +4,21 @@
 }
     <div class="row">
         <div class="pt-4 row pb-5 bg-dark mt-5" style="position: fixed; left: 0; width: 23%; padding: 20px;">
-            @Ajax.ActionLink("Товар", "Products", "Manager", new AjaxOptions {LoadingElementId = "Loading", UpdateTargetId = "Table", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-primary col-12 mt-5" })
+            @Ajax.ActionLink("Відеоігри", "Products", "Manager", new AjaxOptions {LoadingElementId = "Loading", UpdateTargetId = "Table", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-primary col-12 mt-5" })
             @Ajax.ActionLink("Жанри", "Categories", "Manager", new AjaxOptions { LoadingElementId = "Loading", UpdateTargetId = "Table", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-primary col-12 mt-5" })
             @Ajax.ActionLink("Розробники", "Developers", "Manager", new AjaxOptions { LoadingElementId = "Loading", UpdateTargetId = "Table", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-primary col-12 mt-5" })
-            @Ajax.ActionLink("Видавець", "Publishers", "Manager", new AjaxOptions { LoadingElementId = "Loading", UpdateTargetId = "Table", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-primary col-12 mt-5" })
-            @Ajax.ActionLink("Операційна система", "OperatingSystems", "Manager", new AjaxOptions { LoadingElementId = "Loading", UpdateTargetId = "Table", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-primary col-12 mt-5" })
+            @Ajax.ActionLink("Видавництво", "Publishers", "Manager", new AjaxOptions { LoadingElementId = "Loading", UpdateTargetId = "Table", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-primary col-12 mt-5" })
+            @Ajax.ActionLink("Операційні системи", "OperatingSystems", "Manager", new AjaxOptions { LoadingElementId = "Loading", UpdateTargetId = "Table", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-primary col-12 mt-5" })
         </div>
 
 
         <div class="col-9 mt-5 bg-dark p-2 pt-5 pb-5 text-center" style="margin-left:40px; color: white; margin-left: auto; margin-right: auto;">
             <div style="display: none; position: fixed;  color: #f3ca20; left: 0; width: 100%;" id="Loading">
                 <div style="background-color: #3d3d3d; margin-left: auto; margin-right: auto; width: 50%;">
-                    <p class="col-12">
+                    <p class="col-12 pt-3" >
                         Будь ласка зачекайте, йде завантаження
                     </p>
-                    <img src="https://acegif.com/wp-content/uploads/loading-25.gif" width="30" />
+                    <ion-icon class="Loading mb-3 mt-3"  name="game-controller"></ion-icon>
                 </div>
             </div>
             <div id="Table">

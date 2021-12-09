@@ -15,6 +15,10 @@ namespace GamesShop.Models
     // В профиль пользователя можно добавить дополнительные данные, если указать больше свойств для класса ApplicationUser. Подробности см. на странице https://go.microsoft.com/fwlink/?LinkID=317594.
     public class ApplicationUser : IdentityUser
     {
+        [Required]
+        public virtual Cart Cart { get; set; }
+        public virtual List<Order> Orders { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Обратите внимание, что authenticationType должен совпадать с типом, определенным в CookieAuthenticationOptions.AuthenticationType
@@ -39,6 +43,8 @@ namespace GamesShop.Models
         public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Key> Keys { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         public static ApplicationDbContext Create()
         {
@@ -66,6 +72,7 @@ namespace GamesShop.Models
         public virtual List<Category> Categories { get; set; }
         public virtual List<Comment> Comments { get; set; }
         public virtual List<Key> Keys { get; set; }
+        public virtual List<Cart> Cart { get; set; }
 
         public Product()
         {
@@ -74,6 +81,7 @@ namespace GamesShop.Models
             Categories = new List<Category>();
             Comments = new List<Comment>();
             Keys = new List<Key>();
+            Cart = new List<Cart>();
         }
     }
 
@@ -112,6 +120,11 @@ namespace GamesShop.Models
         public int Id { get; set; }
         public string CategoryName { get; set; }
         public virtual List<Product> Products { get; set; }
+
+        public Category()
+        { 
+            Products = new List<Product>(); 
+        }
     }
 
 
@@ -131,9 +144,30 @@ namespace GamesShop.Models
         public virtual Product Product { get; set; }
     }
 
+    public class Order
+    {
+        public int Id { get; set; }
+        public virtual List<Key> Keys { get; set; }
+        public virtual ApplicationUser User { get; set; }
+        public double Summary { get; set; }
+
+        public Order()
+        {
+            Keys = new List<Key>();
+        }
+    }
+
+
     public class Cart
     {
         public int Id { get; set; }
         public virtual List<Product> Products { get; set; }
+        
+        public virtual ApplicationUser User { get; set; }
+
+        public Cart()
+        {
+            Products = new List<Product>();
+        }
     }
 }

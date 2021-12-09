@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -9,6 +10,9 @@
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/fontawesome.css")
     <style>
+
+        body {
+        }
 
         input, textarea, select {
             max-width: none;
@@ -119,12 +123,12 @@
                 border-color: #000000;
             }
 
-        .btn-outline-primary:focus,
-        .btn-outline-primary:active {
-            border-color: #f3ca20;
-            color: #ffffff;
-            box-shadow: 0px 0px 9px 1px #f3ca20 !important;
-        }
+            .btn-outline-primary:focus,
+            .btn-outline-primary:active {
+                border-color: #f3ca20;
+                color: #ffffff;
+                box-shadow: 0px 0px 9px 1px #f3ca20 !important;
+            }
 
         #Result {
             transition-duration: 0.3s;
@@ -147,6 +151,7 @@
             outline: none !important;
             transition-duration: 0.3s;
         }
+
             .form-check-input:checked,
             .form-check-input:focus,
             .form-check-input:active {
@@ -155,36 +160,106 @@
                 color: black;
                 box-shadow: 0px 0px 9px 1px #f3ca20 !important;
             }
+
         .input-group-text {
             background-color: #f3ca20;
             border-color: #f3ca20;
             border-radius: 0px;
         }
 
+        .Loading {
+            font-size: 50px;
+            transition-delay: 2s;
+            animation: AnimateLoading 2s cubic-bezier(0.5, 1, 0.5, 1) alternate infinite;
+        }
+
+        @@keyframes AnimateLoading {
+            10% {
+                transform: rotate(0deg) scale(1);
+            }
+
+            100% {
+                transform: rotate(360deg) scale(1.5);
+            }
+        }
+
+        .margin-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cart {
+            position: fixed;
+            right: 0;
+            bottom: 20%;
+            width: 70px;
+            height: 70px;
+            font-size: 40px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s 0.0s linear, color 0.3s 0.0s linear;
+            border-radius: 0px;
+            background-color: #f3ca20;
+            border: 1px black solid;
+            border-bottom: none;
+            color: #000000;
+            text-decoration: none;
+        }
+
+        .cart:hover {
+            background-color: #000000;
+            color: #f3ca20;
+        }
+
+
+        .offcanvas {
+            color: white;
+            border-left: #f3ca20 1px solid;
+        }
+
+        .btn-close- {
+            background: none;
+            border: none;
+            color: #f3ca20;
+            font-size: 30px;
+        }
     </style>
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="~/Catalog/Index">Catalog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="~/Manager/Index">Manager</a>
-                    </li>
-                </ul>
+
+
+    <div class="w-100 container-fluid bg-dark">
+        <div class="d-grid" style="grid-template-columns: 10% 90%; align-items: center;">
+            <div class="d-grid" style="margin-left: 50px; grid-template-columns: 40% 100%; color: #f3ca20; font-size: 40px; align-items: center;">
+                <ion-icon name="game-controller" style=""></ion-icon>
+                <p style="font-size: 15px;" class="m-0 p-0">StroreName</p>
+            </div>
+            <div class="d-grid" style="grid-template-columns: 30% 30% 30%; color: white;">
+                <div class="margin-auto">
+                    <a class="btn btn-outline-primary" aria-current="page" href="~/Catalog/Index">Каталог</a>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <a class="btn btn-outline-primary" aria-current="page" href="~/Manager/Index">Управління</a>
+                    }
+
+                </div>
+                <div class="margin-auto">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="btn btn-outline-primary" aria-current="page" href="~/Cart/Index">Кошик</a>
+                        <a class="btn btn-outline-primary" aria-current="page" href="~/Order/History">Історія</a>
+                    }
+                </div>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
-    </nav>
+
+    </div>
+
     <div class="container">
         @RenderBody()
+
     </div>
 
 
@@ -192,6 +267,9 @@
     @Scripts.Render("~/Scripts/jquery-3.6.0.js")
     @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
     @RenderSection("scripts", required: false)
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
     <script>
         function FileUpd(Input) {
@@ -216,7 +294,7 @@
                 $('#Table').show();
                 $("#Loading").hide();
                 $('#Table').load(route);
-            }, 1500);        
+            }, 1500);
         }
 
         function PopUpHide() {

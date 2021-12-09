@@ -1,0 +1,95 @@
+﻿@model List<GamesShop.Models.Product>
+@using Microsoft.AspNet.Identity;
+@using GamesShop.Models
+@{
+    double Price = 0;
+
+    ApplicationDbContext Context = new ApplicationDbContext();
+    string UserId = User.Identity.GetUserId();
+    ApplicationUser CurrentUser = Context.Users.Find(UserId);
+ }
+    <div class="row">
+
+        <div class="col-10 mt-5 bg-dark p-2 pt-5 pb-5 text-center" style="margin-left:40px; color: white; margin-left: auto; margin-right: auto;">
+            <div style="display: none; position: fixed;  color: #f3ca20; left: 0; width: 100%;" id="Loading">
+                <div style="background-color: #3d3d3d; margin-left: auto; margin-right: auto; width: 50%;">
+                    <p class="col-12 pt-3">
+                        Будь ласка зачекайте, йде завантаження
+                    </p>
+                    <ion-icon class="Loading mb-3 mt-3" name="game-controller"></ion-icon>
+                </div>
+            </div>
+
+            <div class="p-5">
+                @using (Html.BeginForm("Create", "Order", FormMethod.Post, new { @class="row"}))
+                {
+                <div class="col-6">
+                    <h4 class="col-12">Покупка ігор</h4>
+                    @foreach (var Item in Model)
+                    {
+                       
+                        <div class="col-12 row m-0 mt-2">
+                             <input hidden value="@Item.Id" name="Products"/>
+                            <div class="p-0 row mt-2" style="border: 1px solid #f3ca20;">
+                                <img src="~/Files/@Item.Files.FirstOrDefault().FileName" class="col-4 m-0 p-0" />
+                                <div class="col-5" style="vertical-align: central; display: flex;">
+                                    <table align="center">
+                                        <tr>
+                                            <td>
+                                                @Item.ProductName
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @foreach (var Category in Item.Categories)
+                                                {
+                                                    <small>@(Category.CategoryName + " ")</small>
+                                                }
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-3" style="vertical-align: central; display: flex;">
+                                    <table align="center">
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <p style="color: #f3ca20" class="p-0 m-0">@Item.Price грн.</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        {
+                            Price += Item.Price;
+                        }
+                    }
+                    <div class="col-12 row mt-2" style="border: dashed 2px #f3ca20;">
+                        <h5>На сумму</h5>
+                        <h4 style="color: #f3ca20;">@Price грн.</h4>
+                        <input hidden value="@Price" name="Summary" type="number"/>
+                    </div>
+                </div>      
+                <div class="col-6 ">
+                    <h4 class="col-12">Спосіб оплати</h4>
+                    <div class="col-12 mt-2">
+                        <select class="form-control ">
+                            <option>Банківська картка</option>
+                            <option>WebMoney</option>
+                        </select>
+                    </div>
+                    <h4 class="col-12 mt-2">Email</h4>
+                    <div class="col-12 mt-2">
+                        <input type="text" class="form-control " name="Email" value="@CurrentUser.Email" />
+                    </div>
+                    <div class="col-12 mt-2">
+                        <input type="submit" class="btn btn-primary col-12" value="Підтвердити" />
+                    </div>
+                </div>
+                }
+                 </div>
+
+                </div>
+    </div>

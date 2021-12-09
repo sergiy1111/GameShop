@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace GamesShop.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class DeveloperController : Controller
     {
         // GET: Developer
@@ -49,6 +50,7 @@ namespace GamesShop.Controllers
             }
             else
             {
+                
                 return PartialView(Model);
             }
         }
