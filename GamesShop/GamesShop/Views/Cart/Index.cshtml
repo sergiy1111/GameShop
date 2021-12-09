@@ -9,15 +9,19 @@
 }
 
     <div class="row">
-        <div class="pt-4 row pb-5 bg-dark mt-5" style="position: fixed; color: white; left: 0; width: 20%; padding: 20px;">
-            <div class="input-group mb-3 text-center pb-2 pt-2" style="border: 5px dotted #f3ca20">
-                <h4 class="col-12">Загальна сумма покупки</h4>
-                <h3 class="col-12" style="color: #f3ca20;">@Price грн</h3>
+        @if(Model.Count > 0)
+        {
+            <div class="pt-4 row pb-5 bg-dark mt-5" style="position: fixed; color: white; left: 0; width: 20%; padding: 20px;">
+                <div class="input-group mb-3 text-center pb-2 pt-2" style="border: 5px dotted #f3ca20">
+                    <h4 class="col-12">Загальна сумма покупки</h4>
+                    <h3 class="col-12" style="color: #f3ca20;">@Price грн</h3>
+                </div>
+                <div class="input-group mb-3">
+                
+                    <a href="~/Order/Create" class="col-12 btn btn-primary">Перейти до оформлення покупки</a>
+                </div>
             </div>
-            <div class="input-group mb-3">
-                <a href="~/Order/Create" class="col-12 btn btn-primary">Перейти до оформлення покупки</a>
-            </div>
-        </div>
+        }
 
 
         <div class="col-10 mt-5 bg-dark p-2 pt-5 pb-5 text-center" style="margin-left:40px; color: white; margin-left: auto; margin-right: auto;">
@@ -96,7 +100,7 @@
                             </div>
                         </a>
                         <div class="col-2 mt-2" style="border: 1px solid #f3ca20; vertical-align: central; display: flex;">
-                            <a href="~/Cart/Delete/@Item.Id" data-ajax="true" data-ajax-update="#Cart" class="col-12 btn btn-primary">Видалити з корзини</a>
+                            <a href="~/Cart/Delete/@Item.Id" class="col-12 btn btn-primary">Видалити з корзини</a>
                         </div>
 
                     </div>

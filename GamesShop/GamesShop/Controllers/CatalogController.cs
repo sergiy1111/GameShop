@@ -19,8 +19,9 @@ namespace GamesShop.Controllers
         public ActionResult Search(string Search, double MinPrice, double MaxPrice, List<int> OS, List<int> Categories, List<int> Developers)
         {
             ApplicationDbContext Context = new ApplicationDbContext();
-            List<Product> SearchProducts = Context.Products.Where(i => i.ProductName.Contains(Search) || (i.Price > MinPrice && i.Price < MaxPrice)).ToList();
-            if(OS != null)
+            List<Product> SearchProducts = Context.Products.Where(i => i.ProductName.Contains(Search)).ToList();
+            SearchProducts = SearchProducts.Where(i => i.Price >= MinPrice &&  i.Price <= MaxPrice).ToList();
+            if (OS != null)
             {
                 foreach (var item in OS)
                 {

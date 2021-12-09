@@ -43,7 +43,7 @@ namespace GamesShop.Controllers
             CurrentUser.Cart.Products.Remove(Context.Products.Find(Id));
             Context.SaveChanges();
 
-            return PartialView(CurrentUser.Cart.Products);
+            return RedirectToAction("Index");
         }
 
         public ActionResult DeleteFromList(int Id)

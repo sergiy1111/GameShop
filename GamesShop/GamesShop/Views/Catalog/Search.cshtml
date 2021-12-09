@@ -49,7 +49,7 @@
                                 <p style="color: #f3ca20">@Item.Price грн.</p>
                             </div>
                             <div>
-                                <small>Ключів в наявності: @Item.Keys.Count</small>
+                                <small>Ключів в наявності: @Item.Keys.Where(i => i.IsUsed == false).Count()</small>
                             </div>
                         </td>
                     </tr>

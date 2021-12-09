@@ -455,3 +455,10 @@ D:\GitCon\GameShop\GamesShop\GamesShop\obj\Debug\GamesShop.csproj.CoreCompileInp
 D:\GitCon\GameShop\GamesShop\GamesShop\obj\Debug\GamesShop.csproj.CopyComplete
 D:\GitCon\GameShop\GamesShop\GamesShop\obj\Debug\GamesShop.dll
 D:\GitCon\GameShop\GamesShop\GamesShop\obj\Debug\GamesShop.pdb
+D:\University\GroupProg\GamesShop\GamesShop\obj\Debug\GamesShop.Migrations._6.resources
+D:\University\GroupProg\GamesShop\GamesShop\obj\Debug\GamesShop.Migrations._7.resources
+D:\University\GroupProg\GamesShop\GamesShop\obj\Debug\GamesShop.Migrations._8.resources
+D:\University\GroupProg\GamesShop\GamesShop\obj\Debug\GamesShop.Migrations._9.resources
+D:\University\GroupProg\GamesShop\GamesShop\obj\Debug\GamesShop.Migrations._10.resources
+C:\Users\home\Downloads\GamesShop\GamesShop\obj\Debug\GamesShop.Migrations._9.resources
+C:\Users\home\Downloads\GamesShop\GamesShop\obj\Debug\GamesShop.Migrations._10.resources

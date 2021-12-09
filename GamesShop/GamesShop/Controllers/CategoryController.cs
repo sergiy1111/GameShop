@@ -31,9 +31,13 @@ namespace GamesShop.Controllers
         [HttpPost]
         public ActionResult Input(GamesShop.Models.Category Model)
         {
+            ApplicationDbContext Context = new ApplicationDbContext();
+            if (Context.Categories.Where(i => i.CategoryName == Model.CategoryName).Count() > 0)
+            {
+                return PartialView(Model);
+            }
             if (ModelState.IsValid)
             {
-                ApplicationDbContext Context = new ApplicationDbContext();
                 if (Model.Id == -1)
                 {
                     Models.Category NewCategory = new Models.Category();

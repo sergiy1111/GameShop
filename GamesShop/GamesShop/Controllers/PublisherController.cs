@@ -31,9 +31,13 @@ namespace GamesShop.Controllers
         [HttpPost]
         public ActionResult Input(GamesShop.Models.Publisher Model)
         {
+            ApplicationDbContext Context = new ApplicationDbContext();
+            if (Context.Publishers.Where(i => i.PublisherName == Model.PublisherName).Count() > 0)
+            {
+                return PartialView(Model);
+            }
             if (ModelState.IsValid)
             {
-                ApplicationDbContext Context = new ApplicationDbContext();
                 if (Model.Id == -1)
                 {
                     Models.Publisher NewPublisher = new Models.Publisher();

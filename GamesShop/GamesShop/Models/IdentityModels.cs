@@ -93,18 +93,30 @@ namespace GamesShop.Models
         [Display(Name="Назва")]
         [Required(ErrorMessage = "Поле 'Назва' має бути введено")]
         public string Name { get; set; }
+        public virtual List<Product> Products { get; set; }
+
+        public OperatingSystem()
+        {
+            Products = new List<Product>();
+        }
     }
 
 
     public class Publisher
     {
+        [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
+        [Display(Name = "Назва")]
+        [Required(ErrorMessage = "Поле 'Назва' має бути введено")]
         public string PublisherName { get; set; } 
     }
 
     public class Developer
     {
+        [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
+        [Display(Name = "Назва")]
+        [Required(ErrorMessage = "Поле 'Назва' має бути введено")]
         public string DeveloperName { get; set; }
     }
 
@@ -117,7 +129,10 @@ namespace GamesShop.Models
 
     public class Category
     {
+        [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
+        [Display(Name = "Назва")]
+        [Required(ErrorMessage = "Поле 'Назва' має бути введено")]
         public string CategoryName { get; set; }
         public virtual List<Product> Products { get; set; }
 

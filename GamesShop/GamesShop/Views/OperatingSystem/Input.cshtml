@@ -4,7 +4,7 @@
     ModelState state = new ModelState();
 }
 
-@using (Ajax.BeginForm("Input", "OperatingSystem", new AjaxOptions { HttpMethod = "Post", OnSuccess = " Upd('/Manager/OperatingSystems')", UpdateTargetId = "PopUpContent" }, new { @class = "col-12 container" }))
+@using (Ajax.BeginForm("Input", "OperatingSystem", new AjaxOptions { HttpMethod = "Post", OnSuccess = "PopUpHide(); Upd('/Manager/OperatingSystems')", UpdateTargetId = "PopUpContent" }, new { @class = "col-12 container" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.Id)

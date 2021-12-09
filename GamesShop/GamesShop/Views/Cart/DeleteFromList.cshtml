@@ -13,7 +13,7 @@
             <p style="color: #f3ca20;">@Item.Price грн.</p>
         </div>
         <div class="col-3 d-flex align-items-lg-center align-content-center">
-            <a href="~/Cart/DeleteFromList/@Item.Id" class="btn btn-primary margin-auto"><ion-icon name="trash-outline"></ion-icon></a>
+            <a href="~/Cart/DeleteFromList/@Item.Id" data-ajax-update="#Cart" data-ajax-mode="replace" data-ajax="true" class="btn btn-primary margin-auto"><ion-icon name="trash-outline"></ion-icon></a>  
         </div>
     </div>
     {

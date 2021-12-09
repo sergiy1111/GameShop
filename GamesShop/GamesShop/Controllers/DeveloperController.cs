@@ -31,9 +31,14 @@ namespace GamesShop.Controllers
         [HttpPost]
         public ActionResult Input(GamesShop.Models.Developer Model)
         {
+            ApplicationDbContext Context = new ApplicationDbContext();
+            if (Context.Developers.Where(i => i.DeveloperName == Model.DeveloperName).Count() > 0)
+            {
+                return PartialView(Model);
+            }
             if (ModelState.IsValid)
             {
-                ApplicationDbContext Context = new ApplicationDbContext();
+               
                 if (Model.Id == -1)
                 {
                     Models.Developer NewDeveloper = new Models.Developer();

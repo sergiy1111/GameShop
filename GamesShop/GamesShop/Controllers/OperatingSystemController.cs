@@ -32,9 +32,13 @@ namespace GamesShop.Controllers
         [HttpPost]
         public ActionResult Input(GamesShop.Models.OperatingSystem Model)
         {
-            if(ModelState.IsValid)
+            ApplicationDbContext Context = new ApplicationDbContext();
+            if (Context.OperatingSystems.Where(i => i.Name == Model.Name).Count() > 0)
             {
-                ApplicationDbContext Context = new ApplicationDbContext();
+                return PartialView(Model);
+            }
+            if (ModelState.IsValid)
+            {
                 if (Model.Id == -1)
                 {
                     Models.OperatingSystem NewOS = new Models.OperatingSystem();
