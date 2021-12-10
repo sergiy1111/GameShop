@@ -461,3 +461,6 @@ D:\University\GroupProg\GamesShop\GamesShop\obj\Debug\GamesShop.Migrations._8.re
 D:\University\GroupProg\GamesShop\GamesShop\obj\Debug\GamesShop.Migrations._9.resources
 D:\University\GroupProg\GamesShop\GamesShop\obj\Debug\GamesShop.Migrations._10.resources
 D:\University\GroupProg\GamesShop\GamesShop\obj\Debug\GamesShop.Migrations._11.resources
+D:\GitCon\GameShop\GamesShop\GamesShop\obj\Debug\GamesShop.Migrations._9.resources
+D:\GitCon\GameShop\GamesShop\GamesShop\obj\Debug\GamesShop.Migrations._10.resources
+D:\GitCon\GameShop\GamesShop\GamesShop\obj\Debug\GamesShop.Migrations._11.resources
