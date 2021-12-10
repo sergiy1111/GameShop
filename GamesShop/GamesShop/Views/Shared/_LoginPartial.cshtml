@@ -3,14 +3,14 @@
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "form-inline my-2 my-lg-0", style="display: none" })) { @Html.AntiForgeryToken() }
     <div class="margin-auto">
-        <a class="btn btn-outline-primary" aria-current="page" href="~/Manage/Index">Профіль</a>
-        <a class="btn btn-outline-primary" href="javascript:document.getElementById('logoutForm').submit()">Вийти</a>
+        <a class="nav-button" aria-current="page" href="~/Manage/Index">Профіль</a>
+        <a class="nav-button" href="javascript:document.getElementById('logoutForm').submit()">Вийти</a>
     </div>
 }
 else
 {
     <div class="margin-auto">
-        <a class="btn btn-outline-primary" aria-current="page" href="~/Account/Register">Реєстрація</a>
-        <a class="btn btn-outline-primary" aria-current="page" href="~/Account/Login">Авторизація</a>
+        <a class="nav-button" aria-current="page" href="~/Account/Register">Реєстрація</a>
+        <a class="nav-button" aria-current="page" href="~/Account/Login">Авторизація</a>
     </div>
 }

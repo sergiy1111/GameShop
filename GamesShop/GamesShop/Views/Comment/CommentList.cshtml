@@ -1,0 +1,21 @@
+﻿@model List<GamesShop.Models.Comment>
+@using Microsoft.AspNet.Identity;
+
+  @foreach (var Comment in Model)
+        {
+            <div class="col-7 margin-auto mt-5 row" style="border: 1px solid #f3ca20">
+                <div class="col-2 d-flex align-items-center" style="background-color: #3d3d3d;">
+                    <p class="text-center col-12 m-0 p-0">@Comment.User.UserName</p>
+                </div>
+                <div class="col-8" id="@("Comment" + Comment.Id)">
+                    <p class="m-0 mt-3 p-0">@Comment.CommentText</p>
+                    @if (Comment.User.Id == User.Identity.GetUserId())
+                    {
+                        <p class="m-0 p-0"><a href="~/Comment/Edit/@Comment.Id" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#@("Comment" + @Comment.Id)" class="nav-button">Редагувати</a><a href="~/Comment/Delete/@Comment.Id" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#@("Comment" + @Comment.Id)" class="nav-button">Видалити</a></p>
+                    }
+                </div>
+                <div class="col-2 d-flex align-items-center" style="background-color: #3d3d3d;">
+                    <p class="text-center col-12 m-0 p-0">@Comment.Date.ToShortDateString()</p>
+                </div>
+            </div>
+        }

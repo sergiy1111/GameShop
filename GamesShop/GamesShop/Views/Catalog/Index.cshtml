@@ -28,7 +28,7 @@
 </div>
 
 <div class="row">
-    @using (Ajax.BeginForm("Search", "Catalog", new AjaxOptions { UpdateTargetId = "SearchResult" }, new { @class = "pt-4 row pb-5 bg-dark mt-5", style = "position: fixed; color: white; left: 0; width: 23%; padding: 20px;" }))
+    @using (Ajax.BeginForm("Search", "Catalog", new AjaxOptions { UpdateTargetId = "SearchResult" }, new { @class = "pt-4 row pb-5 bg-dark mt-5", style = "position: fixed; color: white; left: 0; width: 23%; padding: 20px; justify-content: center; display: flex;" }))
     {
         <div class="input-group mb-3">
             <input type="submit" class="col-12 btn btn-primary" value="Пошук за фільтрами">
@@ -47,42 +47,53 @@
                 <input type="number" name="MaxPrice" max="@Model.Max(i => i.Price)" value="@Model.Max(i => i.Price)" class="form-control" aria-describedby="PriceTo">
             </div>
         </div>
-
-        <div class="row input-group mt-3" style="justify-content: center; display: flex;">
-            <h5 class="col-12 mt-2">Операційні системи</h5>
-            @foreach (var Item in Context.OperatingSystems)
-            {
-                <div class="form-check col-4" style="margin-left: 10px;">
-                    <input class="form-check-input" type="checkbox" value="@Item.Id" name="OS" id="Check@(Item.Name)">
-                    <label class="form-check-label" for="Check@(Item.Name)">
-                        @Item.Name
-                    </label>
+        <div class="row input-group mt-3" style="">
+            <h5 class="col-12 mt-2 text-center"><a class="colapse-button" data-bs-toggle="collapse" href="#collapseOS" role="button" aria-expanded="false" aria-controls="collapseOS">Операційні системи </a></h5>
+            <div class="collapse col-12" id="collapseOS">
+                <div class="row" style="background-color: #3d3d3d;">
+                    @foreach (var Item in Context.OperatingSystems)
+                    {
+                    <div class="form-check col-6">
+                        <input class="form-check-input" type="checkbox" value="@Item.Id" name="OS" id="Check@(Item.Name)">
+                        <label class="form-check-label" for="Check@(Item.Name)">
+                            @Item.Name
+                        </label>
+                </div>}
                 </div>
-            }
+            </div>
+           
         </div>
-        <div class="row input-group" style="justify-content: center; display: flex;">
-            <h5 class="col-12 mt-3">Жанри</h5>
-            @foreach (var Item in Context.Categories)
-            {
-                <div class="form-check col-4" style="margin-left: 10px;">
-                    <input class="form-check-input" type="checkbox" value="@Item.Id" name="Categories" id="Check@(Item.CategoryName)">
-                    <label class="form-check-label" for="Check@(Item.CategoryName)">
-                        @Item.CategoryName
-                    </label>
+        <div class="row input-group">
+            <h5 class="col-12 mt-2 text-center"><a class="colapse-button" data-bs-toggle="collapse" href="#collapseCat" role="button" aria-expanded="false" aria-controls="collapseCat">Жанри </a></h5>
+            <div class="collapse col-12" id="collapseCat">
+                <div class="row" style="background-color: #3d3d3d;">
+                    @foreach (var Item in Context.Categories)
+                    {
+                        <div class="form-check col-6">
+                            <input class="form-check-input" type="checkbox" value="@Item.Id" name="Categories" id="Check@(Item.CategoryName)">
+                            <label class="form-check-label" for="Check@(Item.CategoryName)">
+                                @Item.CategoryName
+                            </label>
+                        </div>
+                    }
                 </div>
-            }
+            </div>   
         </div>
-        <div class="row input-group" style="justify-content: center; display: flex;">
-            <h5 class="col-12 mt-3">Розробник</h5>
-            @foreach (var Item in Context.Developers)
-            {
-                <div class="form-check col-4" style="margin-left: 10px;">
-                    <input class="form-check-input" type="checkbox" value="@Item.Id" name="Developers" id="Check@(Item.DeveloperName)">
-                    <label class="form-check-label" for="Check@(Item.DeveloperName)">
-                        @Item.DeveloperName
-                    </label>
+        <div class="row input-group">
+            <h5 class="col-12 mt-2 text-center"><a class="colapse-button" data-bs-toggle="collapse" href="#collapseDev" role="button" aria-expanded="false" aria-controls="collapseDev">Розробник </a></h5>
+            <div class="collapse col-12" id="collapseDev">
+                <div class="row" style="background-color: #3d3d3d;">
+                    @foreach (var Item in Context.Developers)
+                    {
+                        <div class="form-check col-6">
+                            <input class="form-check-input" type="checkbox" value="@Item.Id" name="Developers" id="Check@(Item.DeveloperName)">
+                            <label class="form-check-label" for="Check@(Item.DeveloperName)">
+                                @Item.DeveloperName
+                            </label>
+                        </div>
+                    }
                 </div>
-            }
+            </div>   
         </div>
     }
 

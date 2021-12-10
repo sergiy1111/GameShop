@@ -1,0 +1,15 @@
+﻿@model GamesShop.Models.Comment
+
+
+<form action="/Comment/Edit" class="col-12" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#CommentArea" id="form0" method="post">
+    <div class="col-12">
+        <div class="col-12 m-0 row d-flex justify-content-center flex-column align-content-center">
+            <input hidden value="@Model.Id" name="Id" />
+            <textarea name="Text" class="form-control">@Model.CommentText</textarea>
+        </div>
+        <div class="col-12 m-0 row mt-2 d-flex justify-content-between flex-row align-content-between">
+                <input class="btn btn-primary col-5 m-0" type="submit" value="Підтвердити" />
+                <a href="~/Comment/CommentList/@Model.Product.Id" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#CommentArea" class="btn col-5 offset-2 btn-primary">Відмінити</a>
+        </div>
+    </div>
+</form>

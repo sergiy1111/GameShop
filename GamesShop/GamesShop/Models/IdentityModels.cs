@@ -149,6 +149,7 @@ namespace GamesShop.Models
         public string CommentText { get; set; }
         public virtual ApplicationUser User { get; set; }
         public virtual Product Product { get; set; }
+        public DateTime Date { get; set; }
     }
 
     public class Key

@@ -1,0 +1,15 @@
+﻿@model GamesShop.Models.Comment
+
+
+<form action="/Comment/CommentEdit" class="col-12" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#CommentArea" id="form0" method="post">
+    <div class="col-12">
+        <div class="col-12 m-0 row d-flex justify-content-center flex-column align-content-center">
+            <p>Ви дійсно бажаете видалити ваш коментар?</p>
+            <p>"@Model.CommentText"</p>
+        </div>
+        <div class="col-12 m-0 row d-flex justify-content-between flex-row align-content-between">
+            <a href="~/Comment/DeleteConfirm/@Model.Id" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#CommentArea" class="btn col-5 btn-danger">Так</a>
+            <a href="~/Comment/CommentList/@Model.Product.Id" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#CommentArea" class="btn col-5 offset-2 btn-primary">Ні</a>
+        </div>
+    </div>
+</form>

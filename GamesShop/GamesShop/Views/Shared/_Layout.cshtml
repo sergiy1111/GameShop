@@ -9,10 +9,8 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/fontawesome.css")
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <style>
-
-        body {
-        }
 
         input, textarea, select {
             max-width: none;
@@ -41,6 +39,7 @@
 
         body {
             background-image: url(https://lh3.googleusercontent.com/proxy/a6kXhBeA80FnCTWh0DxG3oOu_TlTcVWjoBXOi-SUSulgefvs6tzvB4zLOL5Kb8d_TPLAuOgNqer7CZAaMFJGMtH3HAVyRi2ZuxTQnCNmCivzsndmS4D-ciBUehLP);
+            padding-top: 20px;
         }
 
         .btn-primary {
@@ -206,10 +205,10 @@
             text-decoration: none;
         }
 
-        .cart:hover {
-            background-color: #000000;
-            color: #f3ca20;
-        }
+            .cart:hover {
+                background-color: #000000;
+                color: #f3ca20;
+            }
 
 
         .offcanvas {
@@ -223,12 +222,45 @@
             color: #f3ca20;
             font-size: 30px;
         }
+
+        .nav-button {
+            color: #f3ca20;
+            text-decoration: none;
+            padding: 0;
+            margin-right: 30px;
+        }
+
+            .nav-button:hover {
+                color: #f3ca20;
+                text-decoration: none;
+                text-shadow: 1px 1px 9px #f3ca20;
+            }
+
+        .colapse-button {
+            color: #f3ca20;
+            text-decoration: none;
+            padding: 0;
+            margin-right: 30px;
+        }
+
+            .colapse-button:hover {
+                color: #f3ca20;
+                text-decoration: none;
+                text-shadow: 1px 1px 9px #f3ca20;
+            }
+
+            .colapse-button:after { content: "\25BC"; }
+            .colapse-button[aria-expanded="true"]::after { content: "\25B2"; }
     </style>
 
 </head>
 <body>
-
-
+    @if (User.Identity.IsAuthenticated)
+    { 
+        <div class="w-100 p-0 text-center" style="color: #f3ca20; height: 5%;">
+            <p class="p-0 pb-4 m-0">Ви увійшли як @User.Identity.Name</p>
+        </div>
+    }
     <div class="w-100 container-fluid bg-dark">
         <div class="d-grid" style="grid-template-columns: 10% 90%; align-items: center;">
             <div class="d-grid" style="margin-left: 50px; grid-template-columns: 40% 100%; color: #f3ca20; font-size: 40px; align-items: center;">
@@ -237,19 +269,17 @@
             </div>
             <div class="d-grid" style="grid-template-columns: 30% 30% 30%; color: white;">
                 <div class="margin-auto">
-                    <a class="btn btn-outline-primary" aria-current="page" href="~/Catalog/Index">Каталог</a>
+                    <a class="nav-button" aria-current="page" href="~/Catalog/Index">Каталог</a>
                     @if (User.IsInRole("Administrator"))
                     {
-                        <a class="btn btn-outline-primary" aria-current="page" href="~/Manager/Index">Управління</a>
-                    }
+        <a class="nav-button" aria-current="page" href="~/Manager/Index">Управління</a>}
 
                 </div>
                 <div class="margin-auto">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <a class="btn btn-outline-primary" aria-current="page" href="~/Cart/Index">Кошик</a>
-                        <a class="btn btn-outline-primary" aria-current="page" href="~/Order/History">Історія</a>
-                    }
+        <a class="nav-button" aria-current="page" href="~/Cart/Index">Кошик</a>
+                        <a class="nav-button" aria-current="page" href="~/Order/History">Історія</a>}
                 </div>
                 @Html.Partial("_LoginPartial")
             </div>

@@ -95,4 +95,49 @@
         </p>
     </div>
 
+    <div class="col-12 mt-5 row">
+        <h5 class="col-12 mb-3 text-center">Коментарі</h5>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <form action="/Comment/CommentAdd" class="row col-12" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#CommentArea" id="form0" method="post"> 
+                <div class="col-7 row margin-auto" style="padding-right: 0px;">
+                    <div class="col-10 p-0">
+                        <input hidden value="@Model.Id" name="Id"/>
+                        <textarea name="Text" class="form-control"></textarea>
+                    </div>
+                    <div class="col-2">
+                        <input class="btn btn-primary h-100" type="submit" value="Підтвердити"/>
+                    </div>
+                </div>     
+            </form>
+        }
+        else
+        {
+             <p class="col-12 text-center" style="color: #f3ca20 ">Для того щоб коментувати будь ласка <a href="~/Account/Login">увійдіть</a>, або <a href="~/Account/Register">зареєструйтесь</a></p>
+        }
+
+    <div class="col-12" id="CommentArea">
+        @foreach (var Comment in Model.Comments)
+        {
+            <div class="col-7 margin-auto mt-5 row" style="border: 1px solid #f3ca20">
+                <div class="col-2 d-flex align-items-center" style="background-color: #3d3d3d;">
+                    <p class="text-center col-12 m-0 p-0">@Comment.User.UserName</p>
+                </div>
+                <div class="col-8" id="@("Comment" + Comment.Id)">
+                    <p class="m-0 mt-3 p-0">@Comment.CommentText</p>
+                    @if (Comment.User.Id == User.Identity.GetUserId())
+                    {
+                        <p class="m-0 p-0"><a href="~/Comment/Edit/@Comment.Id" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#@("Comment" + @Comment.Id)" class="nav-button">Редагувати</a><a href="~/Comment/Delete/@Comment.Id" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#@("Comment" + @Comment.Id)" class="nav-button">Видалити</a></p>
+                    }
+                </div>
+                <div class="col-2 d-flex align-items-center" style="background-color: #3d3d3d;">
+                    <p class="text-center col-12 m-0 p-0">@Comment.Date.ToShortDateString()</p>
+                </div>
+            </div>
+        }
+
+    </div>
+   
+    </div>
+
 </div>

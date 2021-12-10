@@ -216,11 +216,7 @@ namespace GamesShop.Controllers
             }
             return PartialView(ViewModel);
         }
-        public ActionResult Info(int Id)
-        {
-            ApplicationDbContext Context = new ApplicationDbContext();
-            return PartialView(Context.Products.Find(Id));
-        }
+
         public ActionResult Category()
         {
             ApplicationDbContext Context = new ApplicationDbContext();
@@ -244,6 +240,12 @@ namespace GamesShop.Controllers
         }
 
         public ActionResult Delete(int Id)
+        {
+            ApplicationDbContext Context = new ApplicationDbContext();
+            return PartialView(Context.Products.Find(Id));
+        }
+
+        public ActionResult Info(int Id)
         {
             ApplicationDbContext Context = new ApplicationDbContext();
             return PartialView(Context.Products.Find(Id));
