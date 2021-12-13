@@ -1,9 +1,7 @@
 ﻿using GamesShop.Models;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace GamesShop.Controllers
@@ -11,7 +9,6 @@ namespace GamesShop.Controllers
     [Authorize(Roles = "Administrator")]
     public class ProductController : Controller
     {
-        // GET: Product
         public ActionResult Input(int? Id)
         {
             ProductInputViewModel viewModel = new ProductInputViewModel();

@@ -87,7 +87,7 @@ namespace GamesShop.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Неудачная попытка входа.");
+                    ModelState.AddModelError("", "Невдала спроба авторизації. Перевірте дані.");
                     return View(model);
             }
         }
@@ -130,7 +130,7 @@ namespace GamesShop.Controllers
                     return View("Lockout");
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Неправильный код.");
+                    ModelState.AddModelError("", "Невірний код.");
                     return View(model);
             }
         }

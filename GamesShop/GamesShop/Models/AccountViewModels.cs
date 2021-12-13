@@ -99,7 +99,7 @@ namespace GamesShop.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Підтвердеження пароля")]
-        [Compare("Password", ErrorMessage = "Пароль и его подтверждение не совпадают.")]
+        [Compare("Password", ErrorMessage = "Парольі не співпадають.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
